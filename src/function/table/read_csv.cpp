@@ -207,7 +207,7 @@ static unique_ptr<FunctionData> ReadCSVBind(ClientContext &context, TableFunctio
 			}
 			options.sql_type_list.reserve(sql_type_names.size());
 			for (auto &sql_type : sql_type_names) {
-				auto def_type = TransformStringToLogicalType(sql_type);
+				auto def_type = TransformStringToLogicalType(sql_type, context);
 				if (def_type.id() == LogicalTypeId::USER) {
 					throw BinderException("Unrecognized type \"%s\" for read_csv_auto %s definition", sql_type,
 					                      kv.first);
